@@ -28,12 +28,20 @@ function trash --description 'Move files to trash'
     end
 
     if not test (count $files) = 0
-        set error 'Invalid path(s): ["'(string join '", "' $files)'"]'
-        echo $error
+        if test (count $files) = 1
+            set error 'Invalid path: ["'$files'"]'
+        else
+            set error 'Invalid paths: ["'(string join '", "' $files)'"]'
+        end
         command notify-send -u critical -c Utility -a Trash $error
+        echo $error
     end
 
-    set success (string join ' ' 'Moved' $length 'item(s) to Trash')
+    if test $length = 1
+        set success (string join ' ' 'Moved' $length 'item to Trash')
+    else
+        set success (string join ' ' 'Moved' $length 'items to Trash')
+    end
     echo $success
     command notify-send -u low -c Utility -a Trash $success
 end
