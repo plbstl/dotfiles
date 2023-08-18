@@ -31,6 +31,7 @@ chruby ruby-3.2.2
 # android
 set -gx ANDROID_HOME /Users/setale/Library/Android/sdk
 if not string match -q -- $ANDROID_HOME $PATH
-    set -gx PATH "$ANDROID_HOME" $PATH
+    set -gx PATH "$ANDROID_HOME/emulator" $PATH
+    set -gx PATH "$ANDROID_HOME/platform-tools" $PATH
 end
 # android end
